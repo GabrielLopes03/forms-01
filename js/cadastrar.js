@@ -2,29 +2,29 @@ let email = document.getElementById('email');
 let senha = document.getElementById('senha');
 
 
-//
+//Criando eventos dos botões
 document.getElementById('botaoLogin')
     .addEventListener('click', (e) => {
         e.preventDefault();
-        window.open("../login.html");
+        window.open('../login.html');
         window.close();
 
     }
     );
-document.getElementById('boataoCad')
+document.getElementById('botaoCad')
     .addEventListener('click', (e) => {
         e.preventDefault();
-        if (email.value !== " " || senha.value !== " ") {
+
+        if (email.value !== "" || senha.value !== "") {
             cadastro()
         } else {
-            alert("Preencha o email e a senha")
-            email.focus()
+            alert("Preencha o email e senha");
+            email.focus();
         }
-
     }
     );
 
-/* Criando CRUD no Storage */
+//Criando CRUD no Storage
 
 // Create - Cadastrar
 function cadastro() {
@@ -34,22 +34,28 @@ function cadastro() {
 
     let usuarios = new Array();
 
-    //Verificando se existe USUSARIO no Storage
+    //verificando se existe USUARIOS no Storage
     if (localStorage.hasOwnProperty('usuarios')) {
-        //Recuperando os Valores da chave Usuarios
-        //Convertendo a chave USUARIOS em objto
-        usuarios = JSON.parse(localStorage.getElementById('usuarios'));
+        //Reuperar os valores da chave Usuarios
+        //Convertendo a chave USUARIOS em objeto
+        usuarios = JSON.parse(localStorage.getItem('usuarios'));
 
     }
-
-    //Adicionar um novo usuario no sistema
-    usuarios.push({ email, senha });
+    
+    //adicionar um novo usuário no Storage
+  
+    email = email.value;
+    senha = senha.value;
+    
+    usuarios.push({email,senha });
 
     //convertendo para String 
-    usuarios.setItem('usuarios', JSON.stringify(usuarios));
+   localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
-    alert("Usuario Cadastrado com sucesso!")
+    alert("Usuário cadastrado com sucesso!!!");
     document.getElementById('email').value = '';
     document.getElementById('senha').value = '';
     document.getElementById('email').focus();
+
+
 }
